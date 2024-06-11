@@ -18,11 +18,11 @@ const config = {
   },
   async redirects() {
     return [
-      {
-        source: "/",
-        destination: "/dashboard",
-        permanent: true,
-      },
+      // {
+      //   source: "/",
+      //   destination: "/dashboard",
+      //   permanent: true,
+      // },
     ];
   },
 };

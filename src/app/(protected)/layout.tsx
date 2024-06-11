@@ -1,24 +1,11 @@
-import Image from "next/image";
 import { Search } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
-import { SignOutButton } from "@clerk/nextjs";
 import Breadcrumbs from "@/components/breadcrumbs";
 import { ThemeToggleButton } from "@/components/theme-toggle-button";
 import { SidebarDesktop, SidebarMobile } from "@/components/sidebar";
-import { currentUser } from "@clerk/nextjs/server";
+import { ProfileDropdown } from "@/components/profile-dropdown";
 
 export default async function MainLayout(props: { children: React.ReactNode }) {
-  const user = await currentUser();
-
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <SidebarDesktop />
@@ -34,33 +21,7 @@ export default async function MainLayout(props: { children: React.ReactNode }) {
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
             />
           </div>
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <Image
-                  src={user?.imageUrl ?? ""}
-                  width={36}
-                  height={36}
-                  alt="Avatar"
-                  className="overflow-hidden rounded-full"
-                />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>
-                <SignOutButton>Sign out</SignOutButton>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <ProfileDropdown />
           <ThemeToggleButton />
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
