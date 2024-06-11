@@ -18,7 +18,6 @@ const config = {
   },
   async redirects() {
     return [
-      // Basic redirect
       {
         source: "/",
         destination: "/dashboard",
