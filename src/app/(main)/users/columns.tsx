@@ -3,6 +3,10 @@ import type { User } from "@prisma/client";
 import type { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
+function formatFullName(firstName: string | null, lastName: string | null) {
+  return `${firstName ?? ""} ${lastName ?? ""}`.trim() ?? "";
+}
+
 export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "imageUrl",
@@ -10,7 +14,7 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => (
       <Image
         src={row?.original?.imageUrl ?? ""}
-        alt={`${row?.original?.firstName} ${row?.original?.lastName}`.trim()}
+        alt={`${formatFullName(row?.original?.firstName, row?.original?.lastName)}`}
         width={50}
         height={50}
         style={{ borderRadius: "50%" }}
@@ -20,6 +24,8 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: "name",
     header: "Name",
+    cell: ({ row }) =>
+      `${formatFullName(row?.original?.firstName, row?.original?.lastName)}`,
   },
   {
     accessorKey: "email",

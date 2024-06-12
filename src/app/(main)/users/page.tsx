@@ -18,9 +18,9 @@ import {
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { DataTable } from "@/components/data-table";
 import { columns } from "./columns";
-import { getUsers } from "@/server/users";
+import { getUsers } from "@/db/users";
 
-export default async function Dashboard() {
+export default async function Page() {
   const { users } = await getUsers();
 
   return (
